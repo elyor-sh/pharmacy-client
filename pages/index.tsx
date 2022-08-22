@@ -1,32 +1,48 @@
 import type { NextPage } from 'next'
-import styles from '../styles/Home.module.css'
-import {useStores} from "../store";
 import {useEffect} from "react";
+import {observer} from "mobx-react-lite";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {Layout} from "../layout";
+import {MedicineModel} from "../models/response/medicine.model";
+import {useStore} from "../hooks/useStore";
+import {apiGetMedicine} from "../api";
+import {Medicines} from "../components/medicines";
 
-const Index: NextPage = () => {
+interface Props {
+  data: MedicineModel[]
+}
 
-  const {medicineService, medicineStore} = useStores()
+const Index: NextPage<Props> = observer(({data}) => {
+
+  const medicineStore = useStore(store => store.medicineStore)
 
   useEffect(() => {
-    (async () => {
-      await medicineService.getMedicines()
-    })()
-  }, []);
-
+    medicineStore.setMedicines(data)
+  }, [data])
 
   return (
-    <div className={styles.container}>
-      {JSON.stringify(medicineStore.medicines)}
-    </div>
+    <Layout>
+      <>
+        <Medicines />
+      </>
+    </Layout>
   )
-}
+})
 
 export default Index
 
-export async function getServerSideProps(context: any) {
+export const getServerSideProps = async ({ locale }: any) => {
 
+  const response = await apiGetMedicine()
+
+  const data = await response.data
 
   return {
-    props: {}, // will be passed to the page component as props
+    props: {
+      data: data.items,
+    ...(await serverSideTranslations(locale, ['common', 'medicines']))
+    }
   }
 }
+
+

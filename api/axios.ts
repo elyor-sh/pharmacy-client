@@ -72,9 +72,9 @@ pharmApiInstanceAuth.interceptors.response.use(
         return response;
     },
     (error) => {
-        toast.error(error?.response?.data?.message ? error?.response?.data?.message : 'Xatolik', {
-            toastId: 'AuthResReqError'
-        })
+        // toast.error(error?.response?.data?.message ? error?.response?.data?.message : 'Xatolik', {
+        //     toastId: 'AuthResReqError'
+        // })
         return Promise.reject(error);
     },
 );
@@ -83,16 +83,16 @@ pharmApiInstanceAuth.interceptors.response.use(
 // Request interceptor for API UPLOAD calls
 pharmApiInstanceUpload.interceptors.request.use(
     async (config: AxiosRequestConfig) => {
-        const token = !isServer ? localStorage.getItem('token') : ''
-        if (config.headers) {
-            config.headers['Authorization'] = 'Bearer ' + token;
-        }
+        // const token = !isServer ? localStorage.getItem('token') : ''
+        // if (config.headers) {
+        //     config.headers['Authorization'] = 'Bearer ' + token;
+        // }
         return config;
     },
     (error) => {
-        toast.error(error?.response?.data?.message ? error?.response?.data?.message : 'Xatolik', {
-            toastId: 'UploadReqError'
-        })
+        // toast.error(error?.response?.data?.message ? error?.response?.data?.message : 'Xatolik', {
+        //     toastId: 'UploadReqError'
+        // })
         return Promise.reject(error);
     },
 );
@@ -104,9 +104,9 @@ pharmApiInstanceUpload.interceptors.response.use(
     },
     (error) => {
         // localStorage.removeItem('token');
-        toast.error(error?.response?.data?.message ? error?.response?.data?.message : 'Xatolik', {
-            toastId: 'UploadError'
-        })
+        // toast.error(error?.response?.data?.message ? error?.response?.data?.message : 'Xatolik', {
+        //     toastId: 'UploadError'
+        // })
         return Promise.reject(error);
     },
 );
@@ -114,16 +114,16 @@ pharmApiInstanceUpload.interceptors.response.use(
 // Request interceptor for API UploadFiles calls
 pharmApiInstanceDownloadFiles.interceptors.request.use(
     async (config: AxiosRequestConfig) => {
-        const token = !isServer ? localStorage.getItem('token') : ''
-        if (config.headers) {
-            config.headers['Authorization'] = 'Bearer ' + token;
-        }
+        // const token = !isServer ? localStorage.getItem('token') : ''
+        // if (config.headers) {
+        //     config.headers['Authorization'] = 'Bearer ' + token;
+        // }
         return config;
     },
     (error) => {
-        toast.error(error?.response?.data?.message ? error?.response?.data?.message : 'Xatolik', {
-            toastId: 'DownloadError'
-        })
+        // toast.error(error?.response?.data?.message ? error?.response?.data?.message : 'Xatolik', {
+        //     toastId: 'DownloadError'
+        // })
         return Promise.reject(error);
     },
 );
@@ -134,9 +134,9 @@ pharmApiInstanceDownloadFiles.interceptors.response.use(
         return response;
     },
     (error) => {
-        toast.error(error?.response?.data?.message ? error?.response?.data?.message : 'Xatolik', {
-            toastId: 'DownloadResError'
-        })
+        // toast.error(error?.response?.data?.message ? error?.response?.data?.message : 'Xatolik', {
+        //     toastId: 'DownloadResError'
+        // })
         return Promise.reject(error);
     },
 );
@@ -144,16 +144,16 @@ pharmApiInstanceDownloadFiles.interceptors.response.use(
 // Request interceptor for API calls
 pharmApiInstance.interceptors.request.use(
     async (config: AxiosRequestConfig) => {
-        const token = !isServer ? localStorage.getItem('token') : ''
-        if (config.headers) {
-            config.headers['Authorization'] = 'Bearer ' + token;
-        }
-        return config;
+        // const token = !isServer ? localStorage.getItem('token') : ''
+        // if (config.headers) {
+        //     config.headers['Authorization'] = 'Bearer ' + token;
+        // }
+         return config;
     },
     (error) => {
-        toast.error(error?.response?.data?.message ? error?.response?.data?.message : 'Xatolik', {
-            toastId: 'ReqError'
-        })
+        // toast.error(error?.response?.data?.message ? error?.response?.data?.message : 'Xatolik', {
+        //     toastId: 'ReqError'
+        // })
         return Promise.reject(error);
     },
 );
@@ -164,15 +164,15 @@ pharmApiInstance.interceptors.response.use(
         return response;
     },
     async function (error) {
-        const originalRequest = error.config;
-        if ((error.response.status === 401 || error.response.status === 403) && (typeof originalRequest._retry === 'undefined' || !originalRequest._retry)) {
-            localStorage.clear()
-            window.location.replace('/')
-        }
-
-        toast.error(error?.response?.data?.message ? error?.response?.data?.message : 'Xatolik', {
-            toastId: 'ResError'
-        })
+        // const originalRequest = error.config;
+        // if ((error.response.status === 401 || error.response.status === 403) && (typeof originalRequest._retry === 'undefined' || !originalRequest._retry)) {
+        //     localStorage.clear()
+        //     window.location.replace('/')
+        // }
+        //
+        // toast.error(error?.response?.data?.message ? error?.response?.data?.message : 'Xatolik', {
+        //     toastId: 'ResError'
+        // })
         return Promise.reject(error.response);
     },
 )

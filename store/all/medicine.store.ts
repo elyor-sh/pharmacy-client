@@ -1,5 +1,5 @@
 import {makeAutoObservable} from "mobx";
-import {MedicineModel} from "../../models/response/medicine.model";
+import {MedicineModel} from '../../models/response/medicine.model'
 
 export class MedicineStore {
 
@@ -9,8 +9,7 @@ export class MedicineStore {
         makeAutoObservable(this)
     }
 
-    setMedicines (medicines: MedicineModel[]) {
-        this.medicines = medicines
+    setMedicines (data: MedicineModel[]) {
+        this.medicines = data
     }
-
 }

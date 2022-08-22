@@ -1,0 +1,45 @@
+
+.header__bg {
+  width: 100%;
+  height: 600px;
+  background: url('../../assets/images/doctor-bg.jpg') no-repeat center / cover;
+  position: relative;
+  &::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.33);
+  }
+
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 70px;
+  background: rgba(0, 0, 0, 0.28);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+
+.lang__wrapper {
+  display: flex;
+  justify-content: space-between;
+  max-width: 100px;
+  width: 100%;
+}
+
+.lang__item {
+  width: 30px;
+  height: 20px;
+  cursor: pointer;
+  & svg {
+    width: 100%;
+    height: 100%;
+  }
+}
