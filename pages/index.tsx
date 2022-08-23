@@ -5,24 +5,34 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {Layout} from "../layout";
 import {MedicineModel} from "../models/response/medicine.model";
 import {useStore} from "../hooks/useStore";
-import {apiGetMedicine} from "../api";
+import {apiGetCategories, apiGetMedicine} from "../api";
 import {Medicines} from "../components/medicines";
+import {CategoriesModel} from "../models/response/categories.model";
+import {Categories} from "../components/categories";
 
 interface Props {
-  data: MedicineModel[]
+  medicine: MedicineModel[],
+  categories: CategoriesModel[]
 }
 
-const Index: NextPage<Props> = observer(({data}) => {
+const Index: NextPage<Props> = observer(({medicine, categories}) => {
 
   const medicineStore = useStore(store => store.medicineStore)
+  const categoriesStore = useStore(store => store.categoriesStore)
 
   useEffect(() => {
-    medicineStore.setMedicines(data)
-  }, [data])
+    medicineStore.setMedicines(medicine)
+  }, [medicine])
+
+  useEffect(() => {
+    categoriesStore.setCategories(categories)
+  }, [categories]);
+
 
   return (
     <Layout>
       <>
+        <Categories />
         <Medicines />
       </>
     </Layout>
@@ -35,12 +45,17 @@ export const getServerSideProps = async ({ locale }: any) => {
 
   const response = await apiGetMedicine()
 
+  const responseCategories = await apiGetCategories()
+
+  const categoriesData = await responseCategories.data
+
   const data = await response.data
 
   return {
     props: {
-      data: data.items,
-    ...(await serverSideTranslations(locale, ['common', 'medicines']))
+      medicine: data.items,
+      categories: categoriesData.items,
+    ...(await serverSideTranslations(locale, ['common', 'medicines', 'categories']))
     }
   }
 }

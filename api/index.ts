@@ -27,3 +27,8 @@ export const apiPostOrder =
 
 // Получение препаратов
 export const apiGetMedicine = (): AxiosResponseType<MedicineModel[]> =>  pharmApiInstance.get('/medicines')
+
+// =====================-----  Categories  ----==========================
+
+// Получение категорий
+export const apiGetCategories = (): AxiosResponseType<MedicineModel[]> =>  pharmApiInstance.get('/categories')

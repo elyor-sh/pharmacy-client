@@ -4,6 +4,7 @@ import {useTranslation} from "next-i18next";
 import cl from './style.module.scss'
 import {ContainerPh} from "../components/atoms/container";
 import {Header} from "../components/header";
+import {Footer} from "../components/footer";
 
 interface LayoutProps {
     children?: React.ReactChild
@@ -25,6 +26,7 @@ const Layout: React.FC<LayoutProps> = ({children}) => {
             <ContainerPh>
                 {children}
             </ContainerPh>
+            <Footer />
         </>
     );
 };

@@ -6,7 +6,7 @@ export class MedicineStore {
     medicines: MedicineModel[] = []
 
     constructor() {
-        makeAutoObservable(this)
+        makeAutoObservable(this, {}, {autoBind: true})
     }
 
     setMedicines (data: MedicineModel[]) {
