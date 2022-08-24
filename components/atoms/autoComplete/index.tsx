@@ -1,5 +1,11 @@
-import React from 'react';
-import {Autocomplete, AutocompleteProps, TextField, CircularProgress} from "@mui/material";
+import React, {SyntheticEvent} from 'react';
+import {
+    Autocomplete,
+    TextField,
+    CircularProgress,
+    AutocompleteChangeReason,
+    AutocompleteChangeDetails
+} from "@mui/material";
 
 interface AutoCompletePhProps {
     open: boolean
@@ -8,11 +14,16 @@ interface AutoCompletePhProps {
     options: any
     label: string
     placeholder?: string
+    setValue: (value: any) => void
 }
 
-const AsyncAutoComplete: React.FC<AutoCompletePhProps> = ({ open, setOpen, options, getOptionLabel, label, placeholder, ...rest}) => {
+const AsyncAutoComplete: React.FC<AutoCompletePhProps> = ({ open, setOpen, options, getOptionLabel, label, placeholder, setValue, ...rest}) => {
 
     const loading = open && options.length === 0;
+
+    const handleChange = (event: SyntheticEvent<Element, Event>, value: any[], reason: AutocompleteChangeReason, details?: AutocompleteChangeDetails<any> | undefined) => {
+        setValue(value)
+    }
 
     return (
         <div>
@@ -24,6 +35,7 @@ const AsyncAutoComplete: React.FC<AutoCompletePhProps> = ({ open, setOpen, optio
                 open={open}
                 onOpen = {() => setOpen(true)}
                 onClose={() => setOpen(false)}
+                onChange={handleChange}
                 {...rest}
                 renderInput={(params) => (
                     <TextField

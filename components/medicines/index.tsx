@@ -3,8 +3,9 @@ import {useStore} from "../../hooks/useStore";
 import MedicineCard from "./card";
 import {Grid} from "@mui/material";
 import {useTranslation} from "next-i18next";
+import {observer} from "mobx-react-lite";
 
-const Medicines = () => {
+const Medicines = observer(() => {
 
     const medicineStore = useStore(state => state.medicineStore)
 
@@ -32,6 +33,6 @@ const Medicines = () => {
             }
         </Grid>
     );
-};
+});
 
 export {Medicines}

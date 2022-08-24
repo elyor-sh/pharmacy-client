@@ -1,9 +1,12 @@
 
+interface GetMedicineByCategoryIds {
+    ids: number[]
+}
 
 interface PostBody {
 
 }
 
-export namespace MedicineQuestModel {
-
+export namespace MedicineRequestModel {
+    export type getMedicinesByCategoryIds = GetMedicineByCategoryIds
 }
